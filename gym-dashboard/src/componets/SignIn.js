@@ -15,7 +15,7 @@ export default function Login() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log(emailRef)
+    console.log(emailRef.current.value)
 
     try {
       setError("");
@@ -28,70 +28,59 @@ export default function Login() {
     setLoading(false);
   }
   return (
-    <section class="w-full px-8 py-16 bg-gray-100 xl:px-8">
-      <div class="max-w-5xl mx-auto" bis_skin_checked="1">
-        <div
-          class="flex flex-col items-center md:flex-row"
-          bis_skin_checked="1"
-        >
-          <div class="w-full space-y-5 md:w-3/5 md:pr-16" bis_skin_checked="1">
-            <p class="font-medium text-blue-500 uppercase">
-              Building Businesses
-            </p>
-            <h2 class="text-2xl font-extrabold leading-none text-black sm:text-3xl md:text-5xl">
-              Changing The Way People Do Business.
-            </h2>
-            <p class="text-xl text-gray-600 md:pr-16">
-              Learn how to engage with your visitors and teach them about your
-              mission. We're revolutionizing the way customers and businesses
-              interact.
-            </p>
-          </div>
+<div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div className="inline-flex items-start justify-start px-6 rounded-2xl" style={{width: 910, height: 583,}}>
+        <div className="flex space-x-6 items-start justify-start bg-white shadow-2xl rounded-2xl" style={{width: 856, height: 583,}}>
+            <div className="bg-gradient-signin bg-cover bg-center background-img-sign rounded-tl-xl rounded-bl-xl" style={{width: 414, height: 583,}}/>
+            <div className="inline-flex flex-col space-y-6 items-center justify-center py-6 pl-8 pr-5">
+                <div className="inline-flex items-center justify-center">
+                    <div className="w-20 h-full">
+                        <p className="text-3xl font-medium text-gray-400">GYM.</p>
+                    </div>
+                    <p className="text-3xl font-medium text-signin">IO</p>
+                </div>
+                <div className="flex flex-col items-start justify-start">
+                    <p className="text-2xl font-medium text-gray-600">Sign in </p>
+                    <p className="text-xl font-medium text-gray-400">Sign in to continue training :) </p>
+                </div>
+                
+                <div className="w-full">
+                    <div className="flex flex-col items-start justify-start w-full px-3 border rounded-lg border-gray-300">
+                        <div className="inline-flex items-start justify-start w-full py-4">
+                             <input type="text" name="email" ref={emailRef} placeholder = "Email Address" className="flex-1 text-base leading-normal text-gray-500"/>
+                        </div>
+                    </div>
+                </div>
+                <div className="w-full h-14">
+                    <div className="flex flex-col items-start justify-start w-full px-3 border rounded-lg border-gray-300">
+                        <div className="inline-flex items-start justify-start w-full py-4">
+                        <input type="password" name="password" ref={passwordRef} placeholder = "Password" className="flex-1 text-base leading-normal text-gray-500"/>
+                        </div>
+                    </div>
 
-          <div class="w-full mt-16 md:mt-0 md:w-2/5" bis_skin_checked="1">
-            <div
-              class="relative z-10 h-auto p-8 py-10 overflow-hidden bg-white border-b-2 border-gray-300 rounded-lg shadow-2xl px-7"
-              bis_skin_checked="1"
-            >
-              <h3 class="mb-6 text-2xl font-medium text-center">
-                Sign in to your Account
-              </h3>
-              <input
-                type="text"
-                name="email"
-                ref={emailRef}
-                class="block w-full px-4 py-3 mb-4 border border-2 border-transparent border-gray-200 rounded-lg focus:ring focus:ring-blue-500 focus:outline-none"
-                placeholder="Email address"
-              />
-              <input
-                type="password"
-                name="password"
-                ref={passwordRef}
-                class="block w-full px-4 py-3 mb-4 border border-2 border-transparent border-gray-200 rounded-lg focus:ring focus:ring-blue-500 focus:outline-none"
-                placeholder="Password"
-              />
-              <div class="block" bis_skin_checked="1">
-                <button
-                  onSubmit={handleSubmit}
-                  class="w-full px-3 py-4 font-medium text-white bg-blue-600 rounded-lg"
-                >
-                  Log Me In
+                </div>
+                <button onSubmit={handleSubmit} className="inline-flex items-start justify-start w-full px-32 py-1.5 bg-signin shadow rounded-md">
+                    <p className="text-2xl font-medium text-white">Sign In</p>
                 </button>
-              </div>
-              <p class="w-full mt-4 text-sm text-center text-gray-500">
-                Don't have an account?{" "}
-                <a
+                <div className="inline-flex items-center justify-center px-2.5">
+                    <p className="text-base font-medium text-gray-400">Or</p>
+                </div>
+                <div className="inline-flex space-x-2.5 items-center justify-center w-full h-12 py-2.5 bg-white shadow rounded-md">
+                    <div className="flex items-center justify-center w-8 h-8 p-0.5 bg-white">
+                        <img className="flex-1 h-full rounded-lg" src="https://via.placeholder.com/29.39665412902832x29.396934509277344"/>
+                    </div>
+                    <p className="w-3/4 h-7 text-xl font-medium text-black text-opacity-50">Continue with Google</p>
+                </div>
+                <div className="inline-flex items-start justify-start px-2.5">
+                    <p className="text-base font-medium text-gray-400">No account?   <a
                   href="/signup"
-                  class="text-blue-500 underline"
+                  class="text-signin hover underline"
                   bis_skin_checked="1"
-                >
-                  Sign up here
-                </a>
-              </p>
+                >Create one</a></p>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-    </section>
+    </div>
+</div>
   );
 }

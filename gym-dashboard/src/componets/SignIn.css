@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind componets;
 @tailwind utilities;
+
+
+.background-img-sign{
+    background-image: url("./../../src/assets/img/signin.jpeg");
+    
+    
+}

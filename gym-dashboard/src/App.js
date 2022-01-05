@@ -8,11 +8,11 @@ import "./App.css";
 
 function App() {
   return(
-    <div class="md:container md:mx-auto">
+    <div className="md:container md:mx-auto">
         <Router>
           <AuthProvider>
             <Routes>
-              <Route path="/" element={<SignIn/>} />
+              <Route path="/signin" element={<SignIn/>} />
             </Routes>
           </AuthProvider>
         </Router>
