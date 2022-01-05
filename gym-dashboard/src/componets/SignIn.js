@@ -34,7 +34,7 @@ export default function Login() {
             <div className="bg-gradient-signin bg-cover bg-center background-img-sign rounded-tl-xl rounded-bl-xl" style={{width: 414, height: 583,}}/>
             <div className="inline-flex flex-col space-y-6 items-center justify-center py-6 pl-8 pr-5">
                 <div className="inline-flex items-center justify-center">
-                    <div className="w-20 h-full">
+                    <div className="w-19 h-full">
                         <p className="text-3xl font-medium text-gray-400">GYM.</p>
                     </div>
                     <p className="text-3xl font-medium text-signin">IO</p>
