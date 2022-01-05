@@ -44,24 +44,34 @@ export default function Login() {
                     <p className="text-xl font-medium text-gray-400">Sign in to continue training :) </p>
                 </div>
                 
+                <form onSubmit = {handleSubmit}>
+                
                 <div className="w-full">
                     <div className="flex flex-col items-start justify-start w-full px-3 border rounded-lg border-gray-300">
                         <div className="inline-flex items-start justify-start w-full py-4">
-                             <input type="text" name="email" ref={emailRef} placeholder = "Email Address" className="flex-1 text-base leading-normal text-gray-500"/>
+                        <label>
+                             <input type="email" name="email" ref={emailRef} placeholder = "Email Address" className="flex-1 text-base leading-normal text-gray-500"/>
+                             </label>
                         </div>
                     </div>
                 </div>
-                <div className="w-full h-14">
+                <div className="w-full mt-6">
                     <div className="flex flex-col items-start justify-start w-full px-3 border rounded-lg border-gray-300">
                         <div className="inline-flex items-start justify-start w-full py-4">
+                        <label>
                         <input type="password" name="password" ref={passwordRef} placeholder = "Password" className="flex-1 text-base leading-normal text-gray-500"/>
+                        </label>
                         </div>
                     </div>
 
                 </div>
-                <button onSubmit={handleSubmit} className="inline-flex items-start justify-start w-full px-32 py-1.5 bg-signin shadow rounded-md">
+                
+                <button type="submit" className="inline-flex items-start justify-start w-full mt-8 px-32 py-1.5 bg-signin shadow rounded-md">
                     <p className="text-2xl font-medium text-white">Sign In</p>
                 </button>
+                </form>
+              
+
                 <div className="inline-flex items-center justify-center px-2.5">
                     <p className="text-base font-medium text-gray-400">Or</p>
                 </div>
