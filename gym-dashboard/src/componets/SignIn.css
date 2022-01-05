@@ -6,5 +6,8 @@
 .background-img-sign{
     background-image: url("./../../src/assets/img/signin.jpeg");
     
-    
+}
+
+.image-google{
+    content:url("./../../src/assets/img/Google-Logo.svg")
 }
