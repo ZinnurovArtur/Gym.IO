@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import "./SignIn.css";
-import { auth } from "../firebase";
-import { useAuth } from "../contexts/AuthContext";
+import { auth } from "../../firebase";
+import { useAuth } from "../../contexts/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {
@@ -21,7 +21,7 @@ export default function Login() {
       setError("");
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
-      navigate("/");
+      navigate("/navigation");
     } catch {
       setError("Failed to log in");
     }
@@ -93,11 +93,10 @@ export default function Login() {
             <div className="inline-flex items-center justify-center px-2.5">
               <p className="text-base font-medium text-gray-400">Or</p>
             </div>
-            <div className="inline-flex space-x-2.5 items-center justify-center w-full h-12 py-2.5 bg-white shadow rounded-md">
+            <div className="inline-flex space-x-2.5 items-center justify-center w-full h-12 py-2.5 bg-white shadow rounded-md ">
               <div className="flex items-center justify-center w-8 h-8 p-0.5 bg-white">
                 <img
-                  className="flex-1 h-full rounded-lg"
-                  src="https://via.placeholder.com/29.39665412902832x29.396934509277344"
+                  className="flex-1 h-full rounded-lg image-google"
                 />
               </div>
               <p className="w-3/4 h-7 text-xl font-medium text-black text-opacity-50">
