@@ -3,6 +3,7 @@ import React from "react";
 
 import SignIn from "./componets/Signin/SignIn";
 import Navigation from "./componets/Navigation/Navigation";
+import Dashboard from "./componets/Dashboard";
 import { AuthProvider } from "./contexts/AuthContext";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
@@ -15,6 +16,7 @@ function App() {
           <Routes>
             <Route path="/signin" element={<SignIn />} />
             <Route path="/navigation" element={<Navigation />} />
+            <Route path="/dashboard" element={<Dashboard />} />
           </Routes>
         </AuthProvider>
       </Router>

@@ -234,6 +234,27 @@ const Navigation = () => {
         ))}
         <Divider variant="middle" light={true} />
       </List>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "flex-start",
+          alignItems: "center",
+          alignContents: "center",
+          margin: "14px 14px",
+          padding: "12px 4px",
+          borderTop: "1px solid lightgray",
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            marginRight: "18px",
+            paddingLeft: "0px",
+            alignItems: "center",
+            alignContent: "center",
+          }}
+        ></Box>
+      </Box>
     </>
   );
 
