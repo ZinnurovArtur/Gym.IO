@@ -2,12 +2,14 @@ import React, { useContext } from "react";
 import Card from "./Card";
 import Details from "./Details";
 import Navigation from "./Navigation/Navigation";
-import { detailsData } from "../constants/temData";
+import { detailsData, partOfbodyBack } from "../constants/temData";
+
 import Overview from "./Overview";
 import Themecolon from "./Themecolon";
 import Header from "./Header";
 import ThemeContext from "../contexts/ThemeContext";
 import Chart from "./Chart";
+import { mockChartData } from "../constants/temData";
 
 const Dashboard = () => {
   const { darkMode } = useContext(ThemeContext);
@@ -21,7 +23,7 @@ const Dashboard = () => {
         <Header />
       </div>
       <div className="md:col-span-2 row-span-4">
-        <Chart />
+        <Chart filtered="chartfilters" chartData={mockChartData}/>
       </div>
 
       <div>
@@ -31,13 +33,13 @@ const Dashboard = () => {
         <Details details={detailsData} />
       </div>
       <div className="row-span-2 xl:row-span-3">
-        <Card> StatsCustom back </Card>
+        <Chart chartData={partOfbodyBack}>StatsCustom back </Chart>
       </div>
       <div className="row-span-2 xl:row-span-3">
-        <Card> StatsCustom arms</Card>
+        <Chart chartData={mockChartData}>StatsCustom arms </Chart>
       </div>
       <div className="row-span-2 xl:row-span-3">
-        <Card> StatsCustom legs</Card>
+        <Chart chartData={mockChartData}>StatsCustom legs </Chart>
       </div>
     </div>
   );

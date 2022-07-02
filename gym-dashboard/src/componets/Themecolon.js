@@ -9,7 +9,7 @@ const Themecolon = () => {
     };
 
   return (
-    <button className={`rounded-lg border-1 border-neutral-400 p-2 absolute right-8 xl:right-32 shadow-lg ${darkMode ? "shadow-gray-800" : null}`} onClick = {toggleDarkMode}>{darkMode ? <span>White</span>: <span>Dark</span> }</button>
+    <button className={`rounded-lg border-1 border-neutral-200 p-2 absolute right-8 xl:right-32 shadow-lg ${darkMode ? "border-neutral-100" : "border-neutral-400" }`} onClick = {toggleDarkMode}>{darkMode ? <span>White</span>: <span>Dark</span> }</button>
   ); 
 };
 
