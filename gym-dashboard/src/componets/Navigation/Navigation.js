@@ -23,8 +23,9 @@ import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 
 import "./navList.js";
 import navbarList from "./navList.js";
+import { Dashboard } from "@mui/icons-material";
 
-const drawerWidthOpen = 240;
+const drawerWidthOpen = 240; 
 const paddingIconButton = 10;
 const marginIconButton = 14;
 const iconFontSize = 20;
@@ -33,12 +34,12 @@ const drawerWidthClose =
 
 const Navigation = () => {
   const [open, setOpen] = useState();
-  const theme = useTheme();
+  const theme = useTheme();  
   const refFocus = useRef();
 
-  const toogleNavigation = () => {
+  const toogleNavigation = () => { 
     setOpen(!open);
-  };
+  }; 
 
   const toggleSearch = () => {
     setOpen(false);
@@ -242,7 +243,7 @@ const Navigation = () => {
           alignContents: "center",
           margin: "14px 14px",
           padding: "12px 4px",
-          borderTop: "1px solid lightgray",
+         
         }}
       >
         <Box
@@ -259,6 +260,8 @@ const Navigation = () => {
   );
 
   return (
+    <nav className="justify-between">
+   
     <Box sx={{ display: "flex" }}>
       <Drawer
         variant="permanent"
@@ -280,7 +283,7 @@ const Navigation = () => {
               ? { xs: "0px", sm: drawerWidthClose }
               : { xs: drawerWidthClose, sm: drawerWidthOpen },
             borderRight: "0px",
-            borderRadius: "0px 16px 16px 0px",
+            
             boxShadow: theme.shadows[8],
             backgroundColor: open ? "#11101D" : "#11101D",
             transition: theme.transitions.create("width", {
@@ -295,6 +298,9 @@ const Navigation = () => {
         {drawerContent}
       </Drawer>
     </Box>
+    </nav>
+  
+    
   );
 };
 

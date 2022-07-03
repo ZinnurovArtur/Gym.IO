@@ -22,7 +22,10 @@ function App() {
               path="/dashboard"
               element={
                 <ThemeContext.Provider value={{ darkMode, setDarkMode }}>
-                  <Dashboard />
+                  <div className="flex flex-row">
+                    <Navigation />
+                    <Dashboard />
+                  </div>
                 </ThemeContext.Provider>
               }
             />
