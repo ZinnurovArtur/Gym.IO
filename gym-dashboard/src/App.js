@@ -1,13 +1,14 @@
-import { useEffect, useState } from "react";
-import React from "react";
+import { useState } from "react";
 
-import SignIn from "./componets/Signin/SignIn";
-import Navigation from "./componets/Navigation/Navigation";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import "./App.css";
 import Dashboard from "./componets/Dashboard";
+import Header from "./componets/Header";
+import Navigation from "./componets/Navigation/Navigation";
+import NavigationLayaout from "./componets/Navigation/NavigationLayaout";
+import SignIn from "./componets/Signin/SignIn";
 import { AuthProvider } from "./contexts/AuthContext";
 import ThemeContext from "./contexts/ThemeContext";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import "./App.css";
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -17,20 +18,19 @@ function App() {
         <AuthProvider>
           <Routes>
             <Route path="/signin" element={<SignIn />} />
-            <Route path="/navigation" element={<Navigation />} />
-            <Route
-              path="/dashboard"
-              element={
-                <ThemeContext.Provider value={{ darkMode, setDarkMode }}>
-                  <div className="flex flex-row">
-                    <Navigation />
-                    <Dashboard />
-                  </div>
-                </ThemeContext.Provider>
-              }
-            />
           </Routes>
         </AuthProvider>
+
+        <div className="flex flex-row">
+          <ThemeContext.Provider value={{ darkMode, setDarkMode }}>
+            <Routes>
+              <Route element={<NavigationLayaout />}>
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="body" element={<div>loh</div>} />
+              </Route>
+            </Routes>
+          </ThemeContext.Provider>
+        </div>
       </Router>
     </div>
   );

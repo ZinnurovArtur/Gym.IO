@@ -1,8 +1,7 @@
-import React, { useRef, useState } from "react";
-import "./SignIn.css";
-import { auth } from "../../firebase";
+import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
-import { Link, useNavigate } from "react-router-dom";
+import "./SignIn.css";
 
 export default function Login() {
   const emailRef = useRef();

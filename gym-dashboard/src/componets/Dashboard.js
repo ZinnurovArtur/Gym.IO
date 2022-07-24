@@ -1,16 +1,12 @@
-import React, { useContext } from "react";
-import Card from "./Card";
+import { useContext } from "react";
 import Details from "./Details";
 
 import { detailsData, partOfbodyBack } from "../constants/temData";
 
-import Overview from "./Overview";
-import Themecolon from "./Themecolon";
-import Header from "./Header";
+import { mockChartData } from "../constants/temData";
 import ThemeContext from "../contexts/ThemeContext";
 import Chart from "./Chart";
-import { mockChartData } from "../constants/temData";
-import Navigation from "./Navigation/Navigation";
+import Overview from "./Overview";
 
 const Dashboard = () => {
   const { darkMode } = useContext(ThemeContext);
@@ -22,10 +18,6 @@ const Dashboard = () => {
       }`}
     >
   
-      <div className="col-span-1 md:col-span-2 xl:col-span-3 row-span-1 flex justify-start items-center">
-        <Header />
-      </div>
-    
       
       <div className="md:col-span-2 row-span-4">
         <Chart filtered="chartfilters" chartData={mockChartData} />

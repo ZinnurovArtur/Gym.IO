@@ -8,7 +8,8 @@ import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import Switch from "@mui/material/Switch";
+import { Link, useNavigate } from "react-router-dom";
+
 import Typography from "@mui/material/Typography";
 import Badge from "@mui/material/Badge";
 import Tooltip from "@mui/material/Tooltip";
@@ -16,14 +17,13 @@ import InputBase from "@mui/material/InputBase";
 import Divider from "@mui/material/Divider";
 import Button from "@mui/material/Button";
 import Chip from "@mui/material/Chip";
-import IconButton from "@mui/material/IconButton";
+
 
 import MenuIcon from "@mui/icons-material/Menu";
-import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 
 import "./navList.js";
 import navbarList from "./navList.js";
-import { Dashboard } from "@mui/icons-material";
+
 
 const drawerWidthOpen = 240; 
 const paddingIconButton = 10;
@@ -36,10 +36,18 @@ const Navigation = () => {
   const [open, setOpen] = useState();
   const theme = useTheme();  
   const refFocus = useRef();
+  const navigate = useNavigate();
 
   const toogleNavigation = () => { 
     setOpen(!open);
   }; 
+
+  const goLink = (props) => {
+    console.log('click');
+    console.log(props)
+    navigate(props)
+
+  };
 
   const toggleSearch = () => {
     setOpen(false);
@@ -185,6 +193,9 @@ const Navigation = () => {
                 }}
               >
                 <ListItemButton
+                onClick={() =>{
+                  goLink(key.path)
+                }}
                   sx={{
                     margin: "6px 14px",
                     padding: "10px",
