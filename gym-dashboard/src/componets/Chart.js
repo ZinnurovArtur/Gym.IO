@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Tooltip, Area, ResponsiveContainer, AreaChart } from "recharts";
+import { useContext, useEffect, useState } from "react";
+import { Area, AreaChart, ResponsiveContainer, Tooltip } from "recharts";
 import { chartConfig } from "../constants/chartConfig";
 import ThemeContext from "../contexts/ThemeContext";
 import {
   convertToUnixTime,
   converUnixTime,
-  createDate,
+  createDate
 } from "../helpers/data-helpers";
 import Card from "./Card";
 import ChartFilter from "./ChartFilter";

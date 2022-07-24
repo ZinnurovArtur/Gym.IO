@@ -8,7 +8,8 @@ import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import Switch from "@mui/material/Switch";
+import { Link, useNavigate } from "react-router-dom";
+
 import Typography from "@mui/material/Typography";
 import Badge from "@mui/material/Badge";
 import Tooltip from "@mui/material/Tooltip";
@@ -16,15 +17,15 @@ import InputBase from "@mui/material/InputBase";
 import Divider from "@mui/material/Divider";
 import Button from "@mui/material/Button";
 import Chip from "@mui/material/Chip";
-import IconButton from "@mui/material/IconButton";
+
 
 import MenuIcon from "@mui/icons-material/Menu";
-import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 
 import "./navList.js";
 import navbarList from "./navList.js";
 
-const drawerWidthOpen = 240;
+
+const drawerWidthOpen = 240; 
 const paddingIconButton = 10;
 const marginIconButton = 14;
 const iconFontSize = 20;
@@ -33,11 +34,19 @@ const drawerWidthClose =
 
 const Navigation = () => {
   const [open, setOpen] = useState();
-  const theme = useTheme();
+  const theme = useTheme();  
   const refFocus = useRef();
+  const navigate = useNavigate();
 
-  const toogleNavigation = () => {
+  const toogleNavigation = () => { 
     setOpen(!open);
+  }; 
+
+  const goLink = (props) => {
+    console.log('click');
+    console.log(props)
+    navigate(props)
+
   };
 
   const toggleSearch = () => {
@@ -184,6 +193,9 @@ const Navigation = () => {
                 }}
               >
                 <ListItemButton
+                onClick={() =>{
+                  goLink(key.path)
+                }}
                   sx={{
                     margin: "6px 14px",
                     padding: "10px",
@@ -242,7 +254,7 @@ const Navigation = () => {
           alignContents: "center",
           margin: "14px 14px",
           padding: "12px 4px",
-          borderTop: "1px solid lightgray",
+         
         }}
       >
         <Box
@@ -259,6 +271,8 @@ const Navigation = () => {
   );
 
   return (
+    <nav className="justify-between">
+   
     <Box sx={{ display: "flex" }}>
       <Drawer
         variant="permanent"
@@ -280,7 +294,7 @@ const Navigation = () => {
               ? { xs: "0px", sm: drawerWidthClose }
               : { xs: drawerWidthClose, sm: drawerWidthOpen },
             borderRight: "0px",
-            borderRadius: "0px 16px 16px 0px",
+            
             boxShadow: theme.shadows[8],
             backgroundColor: open ? "#11101D" : "#11101D",
             transition: theme.transitions.create("width", {
@@ -295,6 +309,9 @@ const Navigation = () => {
         {drawerContent}
       </Drawer>
     </Box>
+    </nav>
+  
+    
   );
 };
 

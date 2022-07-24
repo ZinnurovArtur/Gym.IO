@@ -1,8 +1,7 @@
-import React, { useRef, useState } from "react";
-import "./SignIn.css";
-import { auth } from "../../firebase";
+import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
-import { Link, useNavigate } from "react-router-dom";
+import "./SignIn.css";
 
 export default function Login() {
   const emailRef = useRef();
@@ -21,7 +20,7 @@ export default function Login() {
       setError("");
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
-      navigate("/navigation");
+      navigate("/dashboard");
     } catch {
       setError("Failed to log in");
     }
@@ -74,7 +73,7 @@ export default function Login() {
                   <input
                     type="password"
                     name="password"
-                    autocomplete="current-password"
+                    autoComplete="current-password"
                     ref={passwordRef}
                     placeholder="Password"
                     className="block w-full px-4 py-3 mb-4 border border-2 border-transparent border-gray-200 rounded-lg focus:ring focus:ring-blue-500 focus:outline-none"
