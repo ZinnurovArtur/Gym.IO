@@ -9,6 +9,7 @@ import { AuthProvider } from "./contexts/AuthContext";
 import ThemeContext from "./contexts/ThemeContext";
 import Body from "./componets/BodyAnalytics/Body";
 import User from "./componets/UserPage/User";
+import Signup from "./componets/Signup/Signup";
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -18,6 +19,7 @@ function App() {
         <AuthProvider>
           <Routes>
             <Route path="/signin" element={<SignIn />} />
+            <Route path="/signup" element={<Signup />} />
           </Routes>
         </AuthProvider>
 
