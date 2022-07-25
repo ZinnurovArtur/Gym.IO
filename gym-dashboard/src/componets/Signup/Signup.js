@@ -13,12 +13,8 @@ const Signup = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const { setTimective } = useAuth();
-
-  async function handleSubmit(e) {
-    e.preventDefault();
-    console.log(e);
-  }
+  const { setTimeActive } = useAuth();
+ 
 
   const validatePassword = () => {
     let isValid = true;
@@ -39,28 +35,32 @@ const Signup = () => {
         .then(() => {
           sendEmailVerification(auth.currentUser)
             .then(() => {
-              setTimective(true);
+              setTimeActive(true);
               navigate("/dashboard");
             })
             .catch((err) => alert(err.message));
         })
         .catch((err) => setError(err.message));
     }
+
+    setEmail("");
+    setPassword("");
+    setConfirmPassword("");
   };
 
   return (
-    <div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div
         className="inline-flex items-start justify-start px-6 rounded-2xl"
         style={{ width: 910, height: 583 }}
       >
         <div
           className="flex space-x-6 items-start justify-start bg-white shadow-2xl rounded-2xl"
-          style={{ width: 856, height: 583 }}
+          style={{ width: 853, height: 625 }}
         >
           <div
             className="bg-gradient-signin bg-cover bg-center background-img-sign rounded-tl-xl rounded-bl-xl"
-            style={{ width: 414, height: 583 }}
+            style={{ width: 414, height: 625 }}
           />
           <div className="inline-flex flex-col space-y-6 items-center justify-center py-6 pl-8 pr-5">
             <div className="inline-flex items-center justify-center">
@@ -75,14 +75,23 @@ const Signup = () => {
                 Sign up to become memeber:){" "}
               </p>
             </div>
+            {error && (
+              <div
+                className=" px-3 py-2 mb-3 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
+                role="alert"
+              >
+                <span className="font-medium">{error}</span> Change a few things
+                up and try submitting again.
+              </div>
+            )}
 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={register}>
               <div className="w-full">
                 <label>
                   <input
                     type="text"
                     name="fullname"
-                    class="block w-full px-4 py-3 mb-4 border border-2 border-transparent border-gray-200 rounded-lg focus:ring focus:ring-blue-500 focus:outline-none"
+                    className="block w-full px-4 py-3 mb-4 border border-2 border-transparent border-gray-200 rounded-lg focus:ring focus:ring-blue-500 focus:outline-none"
                     placeholder="Full Name"
                   />
                 </label>
@@ -92,8 +101,10 @@ const Signup = () => {
                   <input
                     type="email"
                     name="email"
+                    value={email}
                     autoComplete="email"
-                    class="block w-full px-4 py-3 mb-4 border border-2 border-transparent border-gray-200 rounded-lg focus:ring focus:ring-blue-500 focus:outline-none"
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="block w-full px-4 py-3 mb-4 border border-2 border-transparent border-gray-200 rounded-lg focus:ring focus:ring-blue-500 focus:outline-none"
                     placeholder="Email Address"
                   />
                 </label>
@@ -104,8 +115,10 @@ const Signup = () => {
                   <input
                     type="password"
                     name="password"
+                    value={password}
                     autoComplete="current-password"
                     placeholder="Password"
+                    onChange={(e) => setPassword(e.target.value)}
                     className="block w-full px-4 py-3 mb-4 border border-2 border-transparent border-gray-200 rounded-lg focus:ring focus:ring-blue-500 focus:outline-none"
                   />
                 </label>
@@ -116,8 +129,10 @@ const Signup = () => {
                   <input
                     type="password"
                     name="password"
+                    value={confirmPassword}
                     autoComplete="current-password"
                     placeholder="Repeat password"
+                    onChange={(e) => setConfirmPassword(e.target.value)}
                     className="block w-full px-4 py-3 mb-4 border border-2 border-transparent border-gray-200 rounded-lg focus:ring focus:ring-blue-500 focus:outline-none"
                   />
                 </label>
@@ -136,7 +151,7 @@ const Signup = () => {
                 Already memeber?{" "}
                 <a
                   href="/signin"
-                  class="text-signin hover underline"
+                  className="text-signin hover underline"
                   bis_skin_checked="1"
                 >
                   Sign in
