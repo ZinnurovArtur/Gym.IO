@@ -9,25 +9,26 @@ export default function Login() {
   const { login } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const { setTimeActive } = useAuth();
 
   const navigate = useNavigate();
 
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log(emailRef.current.value);
 
     try {
       setError("");
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
+      setTimeActive(true);
       navigate("/dashboard");
-    } catch {
-      setError("Failed to log in");
+    } catch  {
+      setError("Error");
     }
     setLoading(false);
   }
   return (
-    <div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div
         className="inline-flex items-start justify-start px-6 rounded-2xl"
         style={{ width: 910, height: 583 }}
@@ -53,6 +54,15 @@ export default function Login() {
                 Sign in to continue training :){" "}
               </p>
             </div>
+            {error && (
+              <div
+                className=" px-3 py-2 mb-3 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
+                role="alert"
+              >
+                <span className="font-medium">{error}</span> Change a few things
+                up and try submitting again.
+              </div>
+            )}
 
             <form onSubmit={handleSubmit}>
               <div className="w-full">
@@ -60,9 +70,9 @@ export default function Login() {
                   <input
                     type="email"
                     name="email"
-                    autoComplete = "email"
+                    autoComplete="email"
                     ref={emailRef}
-                    class="block w-full px-4 py-3 mb-4 border border-2 border-transparent border-gray-200 rounded-lg focus:ring focus:ring-blue-500 focus:outline-none"
+                    className="block w-full px-4 py-3 mb-4 border border-2 border-transparent border-gray-200 rounded-lg focus:ring focus:ring-blue-500 focus:outline-none"
                     placeholder="Email address"
                   />
                 </label>
@@ -94,9 +104,7 @@ export default function Login() {
             </div>
             <div className="inline-flex space-x-2.5 items-center justify-center w-full h-12 py-2.5 bg-white shadow rounded-md ">
               <div className="flex items-center justify-center w-8 h-8 p-0.5 bg-white">
-                <img
-                  className="flex-1 h-full rounded-lg image-google"
-                />
+                <img className="flex-1 h-full rounded-lg image-google" />
               </div>
               <p className="w-3/4 h-7 text-xl font-medium text-black text-opacity-50">
                 Continue with Google
@@ -107,7 +115,7 @@ export default function Login() {
                 No account?{" "}
                 <a
                   href="/signup"
-                  class="text-signin hover underline"
+                  className="text-signin hover underline"
                   bis_skin_checked="1"
                 >
                   Create one
