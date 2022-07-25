@@ -1,13 +1,52 @@
-import React from "react";
-import { useRef, useState } from "react";
+import {
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+} from "firebase/auth";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
+import { auth } from "../../firebase";
 
 const Signup = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+  const { setTimective } = useAuth();
+
   async function handleSubmit(e) {
     e.preventDefault();
     console.log(e);
   }
+
+  const validatePassword = () => {
+    let isValid = true;
+    if (password !== "" && confirmPassword !== "") {
+      if (password !== confirmPassword) {
+        isValid = false;
+        setError("Password not matched");
+      }
+    }
+    return isValid;
+  };
+
+  const register = (e) => {
+    e.preventDefault();
+    setError("");
+    if (validatePassword()) {
+      createUserWithEmailAndPassword(auth, email, password)
+        .then(() => {
+          sendEmailVerification(auth.currentUser)
+            .then(() => {
+              setTimective(true);
+              navigate("/dashboard");
+            })
+            .catch((err) => alert(err.message));
+        })
+        .catch((err) => setError(err.message));
+    }
+  };
 
   return (
     <div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -43,7 +82,6 @@ const Signup = () => {
                   <input
                     type="text"
                     name="fullname"
-                    
                     class="block w-full px-4 py-3 mb-4 border border-2 border-transparent border-gray-200 rounded-lg focus:ring focus:ring-blue-500 focus:outline-none"
                     placeholder="Full Name"
                   />
