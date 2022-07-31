@@ -1,32 +1,53 @@
-import { useRef, useState } from "react";
+import {
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+} from "firebase/auth";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
-import "./SignIn.css";
+import { auth } from "../../firebase";
 
-export default function Login() {
-  const emailRef = useRef();
-  const passwordRef = useRef();
-  const { login } = useAuth();
+const Signup = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-  const { setTimeActive } = useAuth();
-
   const navigate = useNavigate();
+  const { setTimeActive } = useAuth();
+ 
 
-  async function handleSubmit(e) {
-    e.preventDefault();
-
-    try {
-      setError("");
-      setLoading(true);
-      await login(emailRef.current.value, passwordRef.current.value);
-      setTimeActive(true);
-      navigate("/dashboard");
-    } catch  {
-      setError("Error");
+  const validatePassword = () => {
+    let isValid = true;
+    if (password !== "" && confirmPassword !== "") {
+      if (password !== confirmPassword) {
+        isValid = false;
+        setError("Password not matched");
+      }
     }
-    setLoading(false);
-  }
+    return isValid;
+  };
+
+  const register = (e) => {
+    e.preventDefault();
+    setError("");
+    if (validatePassword()) {
+      createUserWithEmailAndPassword(auth, email, password)
+        .then(() => {
+          sendEmailVerification(auth.currentUser)
+            .then(() => {
+              setTimeActive(true);
+              navigate("/dashboard");
+            })
+            .catch((err) => alert(err.message));
+        })
+        .catch((err) => setError(err.message));
+    }
+
+    setEmail("");
+    setPassword("");
+    setConfirmPassword("");
+  };
+
   return (
     <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div
@@ -35,11 +56,11 @@ export default function Login() {
       >
         <div
           className="flex space-x-6 items-start justify-start bg-white shadow-2xl rounded-2xl"
-          style={{ width: 856, height: 583 }}
+          style={{ width: 853, height: 625 }}
         >
           <div
             className="bg-gradient-signin bg-cover bg-center background-img-sign rounded-tl-xl rounded-bl-xl"
-            style={{ width: 414, height: 583 }}
+            style={{ width: 414, height: 625 }}
           />
           <div className="inline-flex flex-col space-y-6 items-center justify-center py-6 pl-8 pr-5">
             <div className="inline-flex items-center justify-center">
@@ -49,9 +70,9 @@ export default function Login() {
               <p className="text-3xl font-medium text-signin">IO</p>
             </div>
             <div className="flex flex-col items-start justify-start">
-              <p className="text-2xl font-medium text-gray-600">Sign in </p>
+              <p className="text-2xl font-medium text-gray-600">Sign Up </p>
               <p className="text-xl font-medium text-gray-400">
-                Sign in to continue training :){" "}
+                Sign up to become memeber:){" "}
               </p>
             </div>
             {error && (
@@ -64,16 +85,27 @@ export default function Login() {
               </div>
             )}
 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={register}>
               <div className="w-full">
+                <label>
+                  <input
+                    type="text"
+                    name="fullname"
+                    className="block w-full px-4 py-3 mb-4 border border-2 border-transparent border-gray-200 rounded-lg focus:ring focus:ring-blue-500 focus:outline-none"
+                    placeholder="Full Name"
+                  />
+                </label>
+              </div>
+              <div className="w-full mt-4">
                 <label>
                   <input
                     type="email"
                     name="email"
+                    value={email}
                     autoComplete="email"
-                    ref={emailRef}
+                    onChange={(e) => setEmail(e.target.value)}
                     className="block w-full px-4 py-3 mb-4 border border-2 border-transparent border-gray-200 rounded-lg focus:ring focus:ring-blue-500 focus:outline-none"
-                    placeholder="Email address"
+                    placeholder="Email Address"
                   />
                 </label>
               </div>
@@ -83,9 +115,24 @@ export default function Login() {
                   <input
                     type="password"
                     name="password"
+                    value={password}
                     autoComplete="current-password"
-                    ref={passwordRef}
                     placeholder="Password"
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="block w-full px-4 py-3 mb-4 border border-2 border-transparent border-gray-200 rounded-lg focus:ring focus:ring-blue-500 focus:outline-none"
+                  />
+                </label>
+              </div>
+
+              <div className="w-full mt-4">
+                <label>
+                  <input
+                    type="password"
+                    name="password"
+                    value={confirmPassword}
+                    autoComplete="current-password"
+                    placeholder="Repeat password"
+                    onChange={(e) => setConfirmPassword(e.target.value)}
                     className="block w-full px-4 py-3 mb-4 border border-2 border-transparent border-gray-200 rounded-lg focus:ring focus:ring-blue-500 focus:outline-none"
                   />
                 </label>
@@ -95,30 +142,19 @@ export default function Login() {
                 type="submit"
                 className="inline-flex items-start justify-start w-full mt-4 px-32 py-1.5 bg-signin shadow rounded-md hover:bg-violet-400 active:bg-violet-600 focus:outline-none focus:ring focus:ring-violet-300"
               >
-                <p className="text-2xl font-medium text-white">Sign In</p>
+                <p className="text-2xl font-medium text-white">Sign Up</p>
               </button>
             </form>
 
-            <div className="inline-flex items-center justify-center px-2.5">
-              <p className="text-base font-medium text-gray-400">Or</p>
-            </div>
-            <div className="inline-flex space-x-2.5 items-center justify-center w-full h-12 py-2.5 bg-white shadow rounded-md ">
-              <div className="flex items-center justify-center w-8 h-8 p-0.5 bg-white">
-                <img className="flex-1 h-full rounded-lg image-google" />
-              </div>
-              <p className="w-3/4 h-7 text-xl font-medium text-black text-opacity-50">
-                Continue with Google
-              </p>
-            </div>
             <div className="inline-flex items-start justify-start px-2.5">
               <p className="text-base font-medium text-gray-400">
-                No account?{" "}
+                Already memeber?{" "}
                 <a
-                  href="/signup"
+                  href="/signin"
                   className="text-signin hover underline"
                   bis_skin_checked="1"
                 >
-                  Create one
+                  Sign in
                 </a>
               </p>
             </div>
@@ -127,4 +163,6 @@ export default function Login() {
       </div>
     </div>
   );
-}
+};
+
+export default Signup;

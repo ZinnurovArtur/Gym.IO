@@ -1,14 +1,15 @@
-import React from 'react'
+import React from "react";
 
-import Themecolon from './Themecolon';
+import Themecolon from "./Themecolon";
 
 const Header = () => {
-    return (
-        <>
-          
-          <Themecolon />
-        </>
-      );
-}
+  return (
+    <>
+      <div>
+        <Themecolon />
+      </div>
+    </>
+  );
+};
 
-export default Header
+export default Header;

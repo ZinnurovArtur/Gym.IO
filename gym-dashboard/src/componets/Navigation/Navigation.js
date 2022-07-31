@@ -23,6 +23,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 
 import "./navList.js";
 import navbarList from "./navList.js";
+import Themecolon from "../Themecolon.js";
 
 
 const drawerWidthOpen = 240; 
@@ -111,6 +112,7 @@ const Navigation = () => {
             sx={{ fontSize: "20px", color: open ? "lightgray" : "lightGray" }}
           ></MenuIcon>
         </Button>
+        
       </Box>
       <List dense={true}>
         {navbarList.map((key, index) => (
@@ -257,6 +259,7 @@ const Navigation = () => {
          
         }}
       >
+      <Themecolon/>
         <Box
           sx={{
             display: "flex",
@@ -307,8 +310,13 @@ const Navigation = () => {
         }}
       >
         {drawerContent}
+        
+       
       </Drawer>
+     
     </Box>
+    
+    
     </nav>
   
     
