@@ -15,6 +15,17 @@ export const mockChartData = {
   ],
 };
 
+export const detailsBody = [
+  {
+    name: "Bench Press",
+    muscles: ["chest", "triceps", "front-deltoids"]
+  },
+  {
+    name: "Tricep Pushdown",
+    muscles: ["triceps"]
+  }
+];
+
 export const partOfbodyBack = {
   weight: [23, 12, 56, 43, 12, 89, 43],
   date: [
