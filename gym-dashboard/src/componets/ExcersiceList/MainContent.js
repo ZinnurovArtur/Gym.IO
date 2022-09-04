@@ -8,17 +8,18 @@ const MainContent = () => {
   const [error, setError] = useState(null);
 
   const validateImages = async (array) => {
-    let result;
-
     for (let i = 0; i < array.length; i++) {
       if (Array.isArray(array[i].images) && !array[i].length) {
-        for (let j = 0; j < array[i].images.length; j++) {
-          if (array[i].images[j].is_main) {
-            const response = await axios.get(
-              `https://wger.de/api/v2/exerciseimage/${array[i].images[j].id}/thumbnails?format=json`
-            );
-
-            array[i].image = "https://wger.de/" + response.data.small.url;
+        if (!array[i].images.length) {
+          array[i].image = "https://dma.org.uk/missing.png";
+        } else {
+          for (let j = 0; j < array[i].images.length; j++) {
+            if (array[i].images[j].is_main) {
+              const response = await axios.get(
+                `https://wger.de/api/v2/exerciseimage/${array[i].images[j].id}/thumbnails?format=json`
+              );
+              array[i].image = "https://wger.de/" + response.data.small.url;
+            }
           }
         }
       }
@@ -28,7 +29,7 @@ const MainContent = () => {
   };
 
   const languageFilter = (array, languageId) => {
-    const  newArr = array.filter((item) => item.language.id == languageId);
+    const newArr = array.filter((item) => item.language.id == languageId);
     return newArr;
   };
 
@@ -45,8 +46,8 @@ const MainContent = () => {
             },
           }
         );
-        const alldat = await validateImages(response.data.results)
-        setData(languageFilter(alldat,2));
+        const alldat = await validateImages(response.data.results);
+        setData(languageFilter(alldat, 2));
 
         setError(null);
       } catch (err) {
