@@ -2,71 +2,36 @@ import Card from "./Card";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 
-const products = [
-  {
-    id: 1,
-    name: "Earthen Bottle",
-    href: "#",
-    price: "$48",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg",
-    imageAlt:
-      "Tall slender porcelain bottle with natural clay textured body and cork stopper.",
-  },
-  {
-    id: 2,
-    name: "Nomad Tumbler",
-    href: "#",
-    price: "$35",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg",
-    imageAlt:
-      "Olive drab green insulated bottle with flared screw lid and flat top.",
-  },
-  {
-    id: 3,
-    name: "Focus Paper Refill",
-    href: "#",
-    price: "$89",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-03.jpg",
-    imageAlt:
-      "Person using a pen to cross a task off a productivity paper card.",
-  },
-  {
-    id: 4,
-    name: "Machined Mechanical Pencil",
-    href: "#",
-    price: "$35",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg",
-    imageAlt:
-      "Hand holding black machined steel mechanical pencil with brass tip and top.",
-  },
-  // More products...
-];
-
 const MainContent = () => {
   const [data, setData] = useState();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const validateImages = (array) => {
+  const validateImages = async (array) => {
     let result;
 
     for (let i = 0; i < array.length; i++) {
-      
       if (Array.isArray(array[i].images) && !array[i].length) {
         for (let j = 0; j < array[i].images.length; j++) {
           if (array[i].images[j].is_main) {
-            array[i].image = array[i].images[j].image;
-           
+            const response = await axios.get(
+              `https://wger.de/api/v2/exerciseimage/${array[i].images[j].id}/thumbnails?format=json`
+            );
+
+            array[i].image = "https://wger.de/" + response.data.small.url;
           }
         }
       }
     }
+
     return array;
   };
+
+  const languageFilter = (array, languageId) => {
+    const  newArr = array.filter((item) => item.language.id == languageId);
+    return newArr;
+  };
+
   useEffect(() => {
     const getData = async () => {
       try {
@@ -75,13 +40,13 @@ const MainContent = () => {
           {
             params: {
               language: 2,
-              limit:20,
-              offset:40
+              limit: 20,
+              offset: 40,
             },
           }
         );
-
-        setData(validateImages(response.data.results));
+        const alldat = await validateImages(response.data.results)
+        setData(languageFilter(alldat,2));
 
         setError(null);
       } catch (err) {

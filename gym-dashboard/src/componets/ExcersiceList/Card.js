@@ -9,19 +9,19 @@ const Card = ({ imageSrc, imageAlt,name,muscle}) => {
       >
         <div className="relative overflow-hidden pb-3">
           <img
-            className="w-full h-full object-center object-cover group-hover:opacity-75"
+            className="w-fit h-fit object-center object-contain group-hover:opacity-75"
             src={imageSrc}
             loading="lazy"
             alt={imageAlt}
           />
         </div>
         <div className="p-4">
-        <div class="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-3 border-b">
-            <p class="text-gray-600">Name</p>
+        <div className="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-3 border-b">
+            <p className="text-gray-600">Name</p>
             <p>{name}</p>
           </div>
-          <div class="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-3 border-b">
-            <p class="text-gray-600">Muscles</p>
+          <div className="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-3 border-b">
+            <p className="text-gray-600">Muscles</p>
             <p>{muscle}</p>
           </div>
       
@@ -30,12 +30,12 @@ const Card = ({ imageSrc, imageAlt,name,muscle}) => {
         <div className="p-3">
           <a
             href="#"
-            class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-purple rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            className="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-purple rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
             More {muscle} excersices
             <svg
               aria-hidden="true"
-              class="ml-2 -mr-1 w-4 h-4"
+              className="ml-2 -mr-1 w-4 h-4"
               fill="currentColor"
               viewBox="0 0 20 20"
               xmlns="http://www.w3.org/2000/svg"
