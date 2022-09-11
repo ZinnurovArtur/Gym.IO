@@ -15,9 +15,9 @@ const Card = ({ imageSrc, imageAlt,name,muscle}) => {
             alt={imageAlt}
           />
         </div>
-        <div className="p-4">
+        <div className="p-1">
         <div className="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-3 border-b">
-            <p className="text-gray-600">Name</p>
+            <p className="text-gray-600 ">Name</p>
             <p>{name}</p>
           </div>
           <div className="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-3 border-b">
