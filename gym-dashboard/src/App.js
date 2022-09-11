@@ -12,6 +12,7 @@ import User from "./componets/UserPage/User";
 import Signup from "./componets/Signup/Signup";
 import { auth } from "./firebase";
 import { onAuthStateChanged } from "firebase/auth";
+import List from "./componets/ExcersiceList/List";
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -38,7 +39,7 @@ function App() {
                 <Route element={<NavigationLayaout />}>
                   <Route path="/dashboard" element={<Dashboard />} />
                   <Route path="body" element={<Body />} />
-                  <Route path="excersicelist" element={<div>list</div>} />
+                  <Route path="excersicelist" element={<List />} />
                   <Route path="editworkout" element={<div>edit</div>} />
                   <Route path="user" element={<User />} />
                 </Route>
