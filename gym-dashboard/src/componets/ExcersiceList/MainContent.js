@@ -2,10 +2,15 @@ import Card from "./Card";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 
-const MainContent = () => {
+
+
+const MainContent = (props) => {
   const [data, setData] = useState();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+
+
 
   const validateImages = async (array) => {
     for (let i = 0; i < array.length; i++) {
@@ -48,7 +53,6 @@ const MainContent = () => {
         );
         const alldat = await validateImages(response.data.results);
         setData(languageFilter(alldat, 2));
-
         setError(null);
       } catch (err) {
         setError(err.message);
@@ -58,6 +62,8 @@ const MainContent = () => {
       }
     };
     getData();
+
+    
   }, []);
 
   return (
@@ -74,6 +80,7 @@ const MainContent = () => {
           {data &&
             data.map(({ id, name, category, image }) => (
               <a key={id} className="group">
+              {props.setExcsercises(data.length)}
                 <Card muscle={category.name} name={name} imageSrc={image} />
               </a>
             ))}
